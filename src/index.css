@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core palette */
+    --background: 38 71% 96%;        /* #fdf6ee warm cream */
+    --foreground: 22 55% 9%;         /* #1e1610 near-black warm */
+    --card: 0 0% 100%;
+    --card-foreground: 22 55% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 22 55% 9%;
+
+    /* Brand accents */
+    --primary: 18 79% 54%;           /* #e8622a coral/tangerine */
+    --primary-foreground: 0 0% 100%;
+    --accent2: 218 79% 62%;          /* #5b8dee sky blue */
+    --accent3: 158 60% 45%;          /* #2cba7e sage green */
+    --gold: 38 91% 43%;              /* #d4900a amber */
+
+    /* Semantic */
+    --secondary: 38 30% 93%;
+    --secondary-foreground: 22 55% 9%;
+    --muted: 30 20% 93%;
+    --muted-foreground: 26 14% 52%;  /* #9c8170 warm brown-grey */
+    --accent: 18 79% 54%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 65% 51%;        /* #d93030 */
+    --destructive-foreground: 0 0% 100%;
+    --success: 155 67% 37%;          /* #1f9e68 */
+    --border: 30 25% 85%;
+    --input: 30 25% 85%;
+    --ring: 18 79% 54%;
+    --radius: 1rem;
+
+    /* Sidebar */
+    --sidebar-background: 38 71% 96%;
+    --sidebar-foreground: 22 55% 9%;
+    --sidebar-primary: 18 79% 54%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 38 30% 93%;
+    --sidebar-accent-foreground: 22 55% 9%;
+    --sidebar-border: 30 25% 85%;
+    --sidebar-ring: 18 79% 54%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    min-height: 100dvh;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Fraunces', serif;
+  }
+}
+
+/* ── Background texture ── */
+.bg-texture {
+  background-color: hsl(var(--background));
+  background-image:
+    radial-gradient(ellipse 60% 40% at 10% 5%, rgba(232,98,42,0.09) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 90% 90%, rgba(91,141,238,0.08) 0%, transparent 65%),
+    radial-gradient(rgba(180,130,90,0.12) 1.5px, transparent 1.5px);
+  background-size: auto, auto, 28px 28px;
+}
+
+/* ── Cards ── */
+.card-warm {
+  background: hsl(var(--card));
+  border: 1.5px solid rgba(180,130,90,0.18);
+  box-shadow: 0 2px 20px rgba(120,80,40,0.07);
+  border-radius: 16px;
+}
+
+/* ── Buttons ── */
+.btn-primary {
+  background: linear-gradient(135deg, #e8622a, #f0803d);
+  color: white;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(232,98,42,0.28);
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  box-shadow: 0 6px 22px rgba(232,98,42,0.38);
+  transform: translateY(-1px);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: hsl(var(--foreground));
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  border-radius: 12px;
+  border: 1.5px solid rgba(180,130,90,0.28);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.btn-ghost:hover {
+  background: rgba(180,130,90,0.07);
+}
+
+/* ── XP Progress Bar ── */
+.xp-bar-fill {
+  background: linear-gradient(90deg, #e8622a, #f0803d);
+  border-radius: 8px;
+  transition: width 1s ease;
+}
+
+/* ── Animations ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+@keyframes xpPopup {
+  0%   { opacity: 0; transform: translateY(0) scale(0.7); }
+  20%  { opacity: 1; transform: translateY(-8px) scale(1.1); }
+  80%  { opacity: 1; transform: translateY(-28px) scale(1); }
+  100% { opacity: 0; transform: translateY(-44px) scale(0.9); }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes timerPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.animate-fade-in { animation: fadeInUp 0.35s ease both; }
+.animate-slide-down { animation: slideDown 0.3s ease both; }
+.animate-xp-popup { animation: xpPopup 1.4s ease forwards; }
+.animate-timer-urgent { animation: timerPulse 0.7s ease infinite; }
+
+/* ── Category card hover ── */
+.category-card {
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  cursor: pointer;
+}
+.category-card:hover {
+  transform: translateX(4px);
+  border-color: rgba(232,98,42,0.45) !important;
+  box-shadow: 0 4px 24px rgba(232,98,42,0.12), 0 2px 20px rgba(120,80,40,0.07);
+}
+
+/* ── Answer option hover ── */
+.answer-option {
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  cursor: pointer;
+}
+.answer-option:not(.answered):hover {
+  transform: translateX(4px);
+  border-color: rgba(232,98,42,0.5) !important;
+}
+
+/* ── Fraunces util ── */
+.font-display { font-family: 'Fraunces', serif; }
+.font-body    { font-family: 'Outfit', sans-serif; }
+
+/* ── Bottom nav safe area ── */
+.pb-safe { padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
